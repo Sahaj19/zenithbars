@@ -1,5 +1,10 @@
 const input = document.querySelector("input");
 const audio = document.querySelector("audio");
+const canvas = document.querySelector("canvas");
+
+const context = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 input.addEventListener("change", () => {
   const file = input.files[0];
@@ -32,11 +37,28 @@ input.addEventListener("change", () => {
   //
   const bufferDataArray = new Uint8Array(bufferDataLength);
 
-  //
-  setInterval(() => {
+  //width of each zenith bar
+  const barWidth = canvas.width / bufferDataLength;
+  let x = 0;
+
+  //zenith bar function
+  function zenithBar() {
+    x = 0;
+    context.clearRect(0, 0, canvas.width, canvas.height);
     analyzer.getByteFrequencyData(bufferDataArray);
-    console.log(bufferDataArray);
-  }, 2000);
+
+    bufferDataArray.forEach((frequency) => {
+      const barHeight = frequency;
+
+      context.fillStyle = "red";
+      context.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+      x = x + barWidth;
+    });
+
+    if (!audio.ended) requestAnimationFrame(zenithBar);
+  }
+
+  zenithBar();
 });
 
 /*
