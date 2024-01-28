@@ -7,4 +7,4 @@ A simple audio waveform visualizer implemented using HTML `<canvas>` and the Web
 - Visualize audio waveform in real-time.
 - Supports various audio file formats.
 
-deployed here : 
+deployed here : https://zenithbars.netlify.app/
