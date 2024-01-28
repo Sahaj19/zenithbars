@@ -40,6 +40,12 @@ canvas {
     transform: translateX(-50%); 
 }
 
+@media(max-width:490px) {
+    .upload_audio {
+        font-size: 1rem;
+    }
+}
+
 .upload_audio i {
     margin-left: 0.5rem;
 }
@@ -54,10 +60,3 @@ input {
     cursor: pointer;
 }
 
-
-
-@media(max-width:425px) {
-    .upload_audio {
-        font-size: 1rem;
-    }
-}

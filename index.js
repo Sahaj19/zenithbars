@@ -55,10 +55,18 @@ input.addEventListener("change", () => {
       x = x + barWidth;
     });
 
-    if (!audio.ended) requestAnimationFrame(zenithBar);
+    if (!audio.paused) {
+      animationFrameId = requestAnimationFrame(zenithBar);
+    }
   }
 
   zenithBar();
+});
+
+//canvas will be cleared after the audio ends
+audio.addEventListener("ended", () => {
+  cancelAnimationFrame(animationFrameId);
+  context.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 /*
